@@ -20,9 +20,16 @@ exports.up = function(knex) {
         tbl.float('distance');
         tbl.timestamp('date');
         tbl.string('tripType', 255);
+        tbl.integer('user_id')
+            .unsigned()
+            .references('id')
+            .inTable('users')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE');
     });
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema.dropTableIfExists('trips')
+    .dropTableIfExists('users');
 };
