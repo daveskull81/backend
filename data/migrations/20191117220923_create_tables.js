@@ -15,7 +15,7 @@ exports.up = function(knex) {
         tbl.string('description', 2000);
         tbl.integer('isPrivate');
         tbl.integer('isProfessional');
-        tbl.image('string', 2000);
+        tbl.string('image', 2000);
         tbl.float('duration');
         tbl.float('distance');
         tbl.timestamp('date');
