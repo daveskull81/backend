@@ -11,7 +11,7 @@ Checking this in a browser or making a `GET` request to it directly should retur
 }
 ```
 
-## Authorization  
+## Authentication  
 
 All endpoints except for `Login` and `Register` will require Authentication by the client. Any client (web or mobile) will need to authenticate their requests by placing a token as the value for the `Authorization` header.
 A `token` property is returned in the response on both the `Login` and `Register` requests and does not expire for 7 days.
@@ -31,12 +31,13 @@ Method:
 Description:  
 Send user credentials to login to the application  
 
-Expected Body:  
+Body:  
 ```
 { "username": STRING, "password": STRING }
 ```  
 
 Returns:  
+User Login Object
 ```
 { "userId": INTEGER, "username": STRING, "token": STRING }
 ```
@@ -44,7 +45,7 @@ Returns:
 **Register**  
 
 Route:  
-`/api/accounts/register`
+`/accounts/register`
 
 Method:  
 `POST`  
@@ -68,6 +69,7 @@ Body:
 *NOTE*: only the `username` and `password` properties are required for registration. All other properties can be left out of the object. Any omitted properties will be null in the response and can be updated later.
 
 Returns:  
+Registered User Object
 ```
 {
   "user": {
@@ -82,3 +84,37 @@ Returns:
   "token": STRING
 }
 ```
+****
+### Trips
+****
+**Get User Trips**
+
+Route:  
+`/users/:userId/trips`
+
+Method:  
+`GET`  
+
+Description:  
+Retrieve all of the trips for a particular user by their userId 
+
+Returns:  
+Array of trip objects.
+```
+[
+  {
+    "id": INTEGER,
+    "title": STRING,
+    "isPrivate": BOOLEAN,
+    "isProfessional": BOOLEAN,
+    "image": STRING,
+    "duration": FLOAT,
+    "distance": FLOAT,
+    "date": DATE,
+    "tripType": STRING
+  }
+]
+```
+*NOTE*: If user has not trips this will return an empty array.
+
+****
