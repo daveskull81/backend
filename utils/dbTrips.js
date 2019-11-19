@@ -6,26 +6,38 @@ function getUserTrips(userId) {
         .orderBy('date');
 };
 
-function getById(tripId) {
-
+function findById(tripId) {
+    return db('trips').select('id', 'title', 'description', 'isPrivate', 'isProfessional', 'image', 'duration', 'distance', 'date', 'tripType')
+        .where('id', tripId)
+        .first();
 };
 
-function update(tripId) {
-
+function update(updates, tripId) {
+    return db('trips')
+        .where('id', tripId)
+        .update(updates)
+        .then(() => findById(tripId));
 };
 
-function deleteTrip(tripId) {
+async function remove(tripId) {
+    const trip = await findById(tripId);
 
+    return db('trips')
+        .where('id', tripId)
+        .del()
+        .then(() => trip);
 };
 
-function add(trip) {
+async function add(trip) {
+    const [ id ] = await db('trips').insert(trip, 'id');
 
+    return findById(id);
 };
 
 module.exports = {
     getUserTrips,
-    getById,
+    findById,
     update,
-    deleteTrip,
+    remove,
     add
 };
