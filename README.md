@@ -29,15 +29,15 @@ When errors occur with the requests a json object will be returned with an `erro
 
 ### Summary  
 
-| Route | Method | Description |
-|---|---|---|
-| `/accounts/login` | POST | Send user credentials to login to the application | 
-| `/accounts/register` | POST | Send user information to register a new user with the application |
-| `/users/:userId/trips` | GET | Retrieve all of the trips for a particular user by their userId |
-| `/trips/:tripId` | GET | Retrieve data of a specific trip by using its unique id |
-| `/trips/:tripId` | PUT | Update the data of a single trip by its unique id |
-| `/trips/:tripId` | DELETE | Delete a single trip by its unique id |
-| `/trips` | POST | Add data of a new trip for a user |
+| Route | Method | Description | Requires Auth |
+|---|---|---|---|
+| `/accounts/login` | POST | Send user credentials to login to the application | No |
+| `/accounts/register` | POST | Send user information to register a new user with the application | No |
+| `/users/:userId/trips` | GET | Retrieve all of the trips for a particular user by their userId | Yes |
+| `/trips/:tripId` | GET | Retrieve data of a specific trip by using its unique id | Yes |
+| `/trips/:tripId` | PUT | Update the data of a single trip by its unique id | Yes |
+| `/trips/:tripId` | DELETE | Delete a single trip by its unique id |Yes |
+| `/trips` | POST | Add data of a new trip for a user | Yes |
 
 
 ### User Accounts  
