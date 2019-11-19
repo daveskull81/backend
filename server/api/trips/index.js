@@ -1,35 +1,76 @@
 const trips = require('express').Router();
-const { Trips } = require('../../../utils');
-const { verifyJWT } = require('../../middleware/custom');
+const { 
+        Trips, 
+        convertNumToBoolean, 
+        convertBooleanToNum 
+      } = require('../../../utils');
+const { 
+        verifyJWT,
+        verifyTripId,
+        verifyTrip
+      } = require('../../middleware/custom');
+
 
 trips.use(verifyJWT);
 
-trips.get('/:tripId', (req, res) => {
+trips.get('/:tripId', verifyTripId, (req, res) => {
     const tripId = req.params.tripId;
     Trips.findById(tripId)
-        .then(trip => res.status(200).json(trip))
+        .then(trip => {
+            const convertedTrip = {
+                ...trip,
+                isPrivate: convertNumToBoolean(trip.isPrivate),
+                isProfessional: convertNumToBoolean(trip.isProfessional)
+            };
+            res.status(200).json(convertedTrip);
+        })
         .catch(() => res.status(500).json({ error: 'There was an error getting the trip from the database' }));
 });
 
-trips.put('/:tripId', (req, res) => {
+trips.put('/:tripId', verifyTripId, (req, res) => {
     const tripId = req.params.tripId;
     const updates = req.body;
     Trips.update(updates, tripId)
-        .then(trip => res.status(200).json(trip))
+        .then(trip => {
+            const convertedTrip = {
+                ...trip,
+                isPrivate: convertNumToBoolean(trip.isPrivate),
+                isProfessional: convertNumToBoolean(trip.isProfessional)
+            };
+            res.status(200).json(convertedTrip);
+        })
         .catch(() => res.status(500).json({ error: 'There was an error updating the trip in the database' }));
 });
 
-trips.delete('/:tripId', (req, res) => {
+trips.delete('/:tripId', verifyTripId, (req, res) => {
     const tripId = req.params.tripId;
     Trips.remove(tripId)
-        .then(deletedTrip => res.status(200).json(deletedTrip))
+        .then(deletedTrip => {
+            const convertedTrip = {
+                ...deletedTrip,
+                isPrivate: convertNumToBoolean(deletedTrip.isPrivate),
+                isProfessional: convertNumToBoolean(deletedTrip.isProfessional)
+            };
+            res.status(200).json(convertedTrip);
+        })
         .catch(() => res.status(500).json({ error: 'There was an error deleting the trip from the database' }));
 });
 
-trips.post('/', (req, res) => {
-    const trip = req.body;
-    Trips.add(trip)
-        .then(newTrip => res.status(201).json(newTrip))
+trips.post('/', verifyTrip, (req, res) => {
+    const tripToAdd = {
+        ...req.body,
+        isPrivate: convertBooleanToNum(req.body.isPrivate),
+        isProfessional: convertBooleanToNum(req.body.isProfessional)
+    };
+    Trips.add(tripToAdd)
+        .then(newTrip => {
+            const convertedTrip = {
+                ...newTrip,
+                isPrivate: convertNumToBoolean(newTrip.isPrivate),
+                isProfessional: convertNumToBoolean(newTrip.isProfessional)
+            };
+            res.status(200).json(convertedTrip);
+        })
         .catch(() => res.status(500).json({ error: 'There was an error adding the trip to the database' }));
 });
 
