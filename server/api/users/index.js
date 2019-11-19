@@ -1,9 +1,10 @@
 const users = require('express').Router();
-const { Trips } = require('../../../utils');
-const { verifyJWT } = require('../../middleware/custom');
-const { convertNumToBoolean } = require('../../../utils');
+const { Trips, Users, convertNumToBoolean } = require('../../../utils');
+const { verifyJWT, verifyUser } = require('../../middleware/custom');
 
-users.get('/:userId/trips', verifyJWT, (req, res) => {
+users.use(verifyJWT);
+
+users.get('/:userId/trips', verifyUser, (req, res) => {
     const userId = req.params.userId;
 
     Trips.getUserTrips(userId)
@@ -20,11 +21,15 @@ users.get('/:userId/trips', verifyJWT, (req, res) => {
         .catch(() => res.status(500).json({ error: 'There was an error getting the trips for the user' }));
 });
 
-users.get('/:userId/profile', (req, res) => {
-   // Handle getting a singel user's profile 
+users.get('/:userId/profile', verifyUser, (req, res) => {
+   const userId = req.params.userId;
+   
+   Users.getProfile(userId)
+        .then(user => res.status(200).json(user))
+        .catch(() => res.status(500).json({ error: 'There was an error getting the user profile' }));
 });
 
-users.put('/:userId/profile', (req, res) => {
+users.put('/:userId/profile', verifyUser, (req, res) => {
     // Handle updating a single user's profile
 });
 
