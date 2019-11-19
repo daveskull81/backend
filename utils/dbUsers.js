@@ -18,8 +18,21 @@ function findByUserNameForLogin(userName) {
         .first();
 };
 
+function getProfile(userId) {
+    return findByUserId(userId);
+};
+
+function updateProfile(updates, userId) {
+    return db('users')
+        .where('id', userId)
+        .update(updates)
+        .then(() => findByUserId(userId));
+};
+
 module.exports = {
     add,
     findByUserId,
-    findByUserNameForLogin
+    findByUserNameForLogin,
+    getProfile,
+    updateProfile
 };
