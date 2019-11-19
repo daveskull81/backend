@@ -99,7 +99,7 @@ Description:
 Retrieve all of the trips for a particular user by their userId 
 
 Returns:  
-Array of trip objects.
+Array of trip objects. By default the trip objects are sorted in ascending order by the `date` property.
 ```
 [
   {
