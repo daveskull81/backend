@@ -4,6 +4,7 @@ const verifyJWT = require('./verifyJWT');
 const verifyTripId = require('./verifyTripId');
 const verifyTrip = require('./verifyTrip');
 const verifyUser = require('./verifyUser');
+const verifyProfileUpdate = require('./verifyProfileUpdate');
 
 module.exports = {
     verifyUserRegInfo,
@@ -11,5 +12,6 @@ module.exports = {
     verifyJWT,
     verifyTripId,
     verifyTrip,
-    verifyUser
+    verifyUser,
+    verifyProfileUpdate
 };

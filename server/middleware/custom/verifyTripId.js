@@ -10,5 +10,5 @@ module.exports = (req, res, next) => {
                 next();
             }
         })
-        .catch(err => console.log(err));
+        .catch(() => res.status(500).json({ error: 'There was an error finding the trip' }));
 };
