@@ -7,7 +7,11 @@ module.exports = (req, res, next) => {
             if (!trip) {
                 res.status(404).json({ error: 'Invalid Trip Id. Trip Not Found.' });
             } else {
-                next();
+                if (req.userIdInToken === trip.user_id) {
+                    next();
+                } else {
+                    res.status(401).json({ error: 'Access to this trip data is unauthorized' });
+                };
             }
         })
         .catch(() => res.status(500).json({ error: 'There was an error finding the trip' }));
