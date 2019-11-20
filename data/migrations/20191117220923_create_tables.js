@@ -12,16 +12,17 @@ exports.up = function(knex) {
     .createTable('trips', tbl => {
         tbl.increments();
         tbl.string('title', 255).notNullable();
-        tbl.string('description', 2000);
-        tbl.integer('isPrivate');
-        tbl.integer('isProfessional');
-        tbl.string('image', 2000);
-        tbl.float('duration');
-        tbl.float('distance');
-        tbl.timestamp('date');
-        tbl.string('tripType', 255);
+        tbl.string('description', 2000).notNullable().defaultTo('');
+        tbl.integer('isPrivate').notNullable().defaultTo(1);
+        tbl.integer('isProfessional').notNullable().defaultTo(1);
+        tbl.string('image', 2000).notNullable().defaultTo('');
+        tbl.float('duration').notNullable().defaultTo(1);
+        tbl.float('distance').notNullable().defaultTo(1);
+        tbl.timestamp('date').notNullable().defaultTo(knex.fn.now());
+        tbl.string('tripType', 255).notNullable().defaultTo('');
         tbl.integer('user_id')
             .unsigned()
+            .notNullable()
             .references('id')
             .inTable('users')
             .onDelete('CASCADE')
