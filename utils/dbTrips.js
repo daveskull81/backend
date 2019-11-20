@@ -1,13 +1,13 @@
 const db = require('../data/dbConfig');
 
 function getUserTrips(userId) {
-    return db('trips').select('id', 'title', 'description', 'isPrivate', 'isProfessional', 'image', 'duration', 'distance', 'date', 'tripType')
+    return db('trips').select('id', 'title', 'description', 'isPrivate', 'isProfessional', 'image', 'duration', 'distance', 'date', 'tripType', 'user_id')
         .where('user_id', userId)
         .orderBy('date');
 };
 
 function findById(tripId) {
-    return db('trips').select('id', 'title', 'description', 'isPrivate', 'isProfessional', 'image', 'duration', 'distance', 'date', 'tripType')
+    return db('trips').select('id', 'title', 'description', 'isPrivate', 'isProfessional', 'image', 'duration', 'distance', 'date', 'tripType', 'user_id')
         .where('id', tripId)
         .first();
 };

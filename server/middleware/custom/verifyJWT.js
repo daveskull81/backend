@@ -5,10 +5,11 @@ module.exports = (req, res, next) => {
 
     if (token) {
         const tokenSecret = process.env.JWT_SECRET;
-        jwt.verify(token, tokenSecret, err => {
+        jwt.verify(token, tokenSecret, (err, decodedToken) => {
             if (err) {
                 res.status(401).json({ error: 'Invalid credentials' });
             } else {
+                req.userIdInToken = decodedToken.userId;
                 next();
             };
         });
