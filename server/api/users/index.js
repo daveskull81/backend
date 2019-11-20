@@ -1,10 +1,9 @@
 const users = require('express').Router();
 const { Trips, Users, convertNumToBoolean } = require('../../../utils');
-const { verifyJWT, verifyUser, verifyProfileUpdate } = require('../../middleware/custom');
+const { verifyJWT, verifyUser, verifyProfileUpdate, verifyUserAccessToUsers } = require('../../middleware/custom');
 
-users.use(verifyJWT);
 
-users.get('/:userId/trips', verifyUser, (req, res) => {
+users.get('/:userId/trips', verifyJWT, verifyUserAccessToUsers, verifyUser, (req, res) => {
     const userId = req.params.userId;
 
     Trips.getUserTrips(userId)
@@ -21,7 +20,7 @@ users.get('/:userId/trips', verifyUser, (req, res) => {
         .catch(() => res.status(500).json({ error: 'There was an error getting the trips for the user' }));
 });
 
-users.get('/:userId/profile', verifyUser, (req, res) => {
+users.get('/:userId/profile', verifyJWT, verifyUserAccessToUsers, verifyUser, (req, res) => {
    const userId = req.params.userId;
    
    Users.getProfile(userId)
@@ -29,7 +28,15 @@ users.get('/:userId/profile', verifyUser, (req, res) => {
         .catch(() => res.status(500).json({ error: 'There was an error getting the user profile' }));
 });
 
-users.put('/:userId/profile', verifyProfileUpdate, verifyUser, (req, res) => {
+users.get('/:userId/profile/public', verifyUser, (req, res) => {
+    const userId = req.params.userId;
+    
+    Users.getProfile(userId)
+         .then(user => res.status(200).json(user))
+         .catch(() => res.status(500).json({ error: 'There was an error getting the user profile' }));
+ });
+
+users.put('/:userId/profile', verifyJWT, verifyUserAccessToUsers, verifyProfileUpdate, verifyUser, (req, res) => {
     const userId = req.params.userId;
     const updates = req.body;
 

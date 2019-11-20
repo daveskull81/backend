@@ -11,9 +11,7 @@ const {
       } = require('../../middleware/custom');
 
 
-trips.use(verifyJWT);
-
-trips.get('/:tripId', verifyTripId, (req, res) => {
+trips.get('/:tripId', verifyJWT, verifyTripId, (req, res) => {
     const tripId = req.params.tripId;
     Trips.findById(tripId)
         .then(trip => {
@@ -27,7 +25,7 @@ trips.get('/:tripId', verifyTripId, (req, res) => {
         .catch(() => res.status(500).json({ error: 'There was an error getting the trip from the database' }));
 });
 
-trips.put('/:tripId', verifyTripId, (req, res) => {
+trips.put('/:tripId', verifyJWT, verifyTripId, (req, res) => {
     const tripId = req.params.tripId;
     const updates = req.body;
     Trips.update(updates, tripId)
@@ -42,7 +40,7 @@ trips.put('/:tripId', verifyTripId, (req, res) => {
         .catch(() => res.status(500).json({ error: 'There was an error updating the trip in the database' }));
 });
 
-trips.delete('/:tripId', verifyTripId, (req, res) => {
+trips.delete('/:tripId', verifyJWT, verifyTripId, (req, res) => {
     const tripId = req.params.tripId;
     Trips.remove(tripId)
         .then(deletedTrip => {
@@ -56,7 +54,7 @@ trips.delete('/:tripId', verifyTripId, (req, res) => {
         .catch(() => res.status(500).json({ error: 'There was an error deleting the trip from the database' }));
 });
 
-trips.post('/', verifyTrip, (req, res) => {
+trips.post('/', verifyJWT, verifyTrip, (req, res) => {
     const tripToAdd = {
         ...req.body,
         isPrivate: convertBooleanToNum(req.body.isPrivate),
