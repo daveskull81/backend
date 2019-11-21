@@ -1,5 +1,7 @@
 const { Users } = require('../../../utils');
 
+//Checks if user exists in the system or not
+
 module.exports = (req, res, next) => {
     const userId = req.params.userId;
     

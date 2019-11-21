@@ -8,6 +8,8 @@ const cors = require('cors');
 //     "optionsSuccessStatus": 204
 //   };
 
+//Global level middleware for the entire server is added here
+//The variable being passed in is the server object
 module.exports = server => {
     server.use(helmet());
     server.use(cors());

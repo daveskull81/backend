@@ -1,3 +1,7 @@
+//Check is made for required fields of trip title and user_id for making updates to trips
+//It also checks if the token contains the user id of the user the request is for
+//to keep another user's token from used to update the profile
+
 module.exports = (req, res, next) => {
     const trip = req.body;
 
