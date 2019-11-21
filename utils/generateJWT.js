@@ -4,7 +4,7 @@ module.exports = (userId) => {
     const payload = {
         userId
     };
-    const secret = process.env.JWT_SECRET;
+    const secret = process.env.JWT_SECRET || 'secret';
     const options = {
         expiresIn: '7d'
     };
