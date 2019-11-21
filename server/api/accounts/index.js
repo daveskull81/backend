@@ -5,6 +5,11 @@ const { Users } = require('../../../utils');
 const { verifyUserRegInfo } = require('../../middleware/custom');
 const { verifyUserLoginInfo } = require('../../middleware/custom');
 
+//Route to log a user in and comapre their password to the hashed
+//version in the database
+//JWT is generated with user id for later requests
+
+
 accounts.post('/login', verifyUserLoginInfo, (req, res) => {
     const { username, password } = req.body;
 
@@ -19,6 +24,9 @@ accounts.post('/login', verifyUserLoginInfo, (req, res) => {
         })
         .catch(() => res.status(500).json({ error: 'There was an error finding the user in the database' }));
 });
+
+//Route to register a new user with the application
+//and store a hased version of their provided passwrd to the database
 
 accounts.post('/register', verifyUserRegInfo, (req, res) => {
     const user = req.body;

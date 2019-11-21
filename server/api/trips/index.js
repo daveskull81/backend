@@ -11,6 +11,8 @@ const {
         verifyNoTripId
       } = require('../../middleware/custom');
 
+//Routes to handle requests made to manage data of the trips for a user
+
 
 trips.get('/:tripId', verifyJWT, verifyTripId, (req, res) => {
     const tripId = req.params.tripId;
