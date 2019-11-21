@@ -2,6 +2,9 @@ const users = require('express').Router();
 const { Trips, Users, convertNumToBoolean } = require('../../../utils');
 const { verifyJWT, verifyUser, verifyProfileUpdate, verifyUserAccessToUsers } = require('../../middleware/custom');
 
+//Routes for managing the data of a user
+//There is one route for getting all of the trips for the specific user
+//Other routes are for managing the profile data of the user
 
 users.get('/:userId/trips', verifyJWT, verifyUserAccessToUsers, verifyUser, (req, res) => {
     const userId = req.params.userId;

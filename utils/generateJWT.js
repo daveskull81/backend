@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 
+//Generation of json web tokens for the
+//authentication process on protected routes
+
 module.exports = (userId) => {
     const payload = {
         userId

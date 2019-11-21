@@ -1,5 +1,8 @@
 const db = require('../data/dbConfig');
 
+//DB methods for working with the Users table and providing CRUD actions
+
+
 async function add(user) {
     const [ id ] = await db('users').insert(user, 'id');
 
