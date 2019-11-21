@@ -6,6 +6,7 @@ const verifyTrip = require('./verifyTrip');
 const verifyUser = require('./verifyUser');
 const verifyProfileUpdate = require('./verifyProfileUpdate');
 const verifyUserAccessToUsers = require('./verifyUserAccessToUsers');
+const verifyNoTripId = require('./verifyNoTripId');
 
 module.exports = {
     verifyUserRegInfo,
@@ -15,5 +16,6 @@ module.exports = {
     verifyTrip,
     verifyUser,
     verifyProfileUpdate,
-    verifyUserAccessToUsers
+    verifyUserAccessToUsers,
+    verifyNoTripId
 };
