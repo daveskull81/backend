@@ -1,3 +1,14 @@
+//Creates two tables for the database
+//One called users and another called trips
+//Users table is used to store username and password as well
+//as user profile data
+//Trips table has data for all trips created by users
+//Trips table has a foreign key to the users table
+//for a one to many relationship
+//between users and trips
+
+
+
 exports.up = function(knex) {
     return knex.schema.createTable('users', tbl => {
         tbl.increments();
