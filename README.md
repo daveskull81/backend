@@ -51,6 +51,7 @@ When errors occur with the requests a json object will be returned with an `erro
 | `/trips` | POST | Add data of a new trip for a user | Yes |
 | `/users/:userId/profile` | GET | Retrieve profile data of a specific user by the user id | Yes |
 | `/users/:userId/profile` | PUT | Update profile data of a specific user by the user id | Yes |
+| `/users/:userId/profile/public` | GET | Retrieve public profile data of a specific user by the user id | No |
 
 
 ### User Accounts  
