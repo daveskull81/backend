@@ -1,5 +1,8 @@
 const db = require('../data/dbConfig');
 
+//DB methods for working with the users table and providing CRUD actions
+
+
 function getUserTrips(userId) {
     return db('trips').select('id', 'title', 'description', 'isPrivate', 'isProfessional', 'image', 'duration', 'distance', 'date', 'tripType', 'user_id')
         .where('user_id', userId)
