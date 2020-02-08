@@ -1,8 +1,19 @@
 # Guidr Backend - API & Database
 
-[Product Canvas](https://docs.google.com/document/d/1ns6BMdMOIOjfxtsIzGvBAaxU45Qd_V9YpT-w1JoLRIc/edit?usp=sharing)
+API and Database code for a Lambda School project. I was assigned as the sole backend developer on a project called Guidr. It was an application that allowed for a professional guide to showcase their skills and build a resume of previous trips they have taken people on. They can log the individual trips and show information about them for how long the trip was for, the type of trip, the location, as well as distance covered. I was tasked with building a backend API and database to support user login/registration and CRUD actions on trips. I worked together with a team of two React devs making a web client and an iOS dev making a mobile client.
 
-Base URL: `https://guidr-backend-api.herokuapp.com/api`
+This project is used as a portfolio piece for my work as a Software Developer. If you are interested in discussing this further with me please feel free to reach out on [Twitter](https://twitter.com/daveskull81) or on my [website](https://www.daveinden.com).
+
+## License
+
+This project is licensed under the terms of the MIT license. For more details see the [LICENSE](https://github.com/daveskull81/backend/blob/master/LICENSE) file.
+
+## Contribution
+This project isn't currently taking contributions, but I am happy to hear feedback. If you have feedback or if there is anything you would like to see changed please open an [issue](https://github.com/daveskull81/backend/issues). You are welcome to fork this project to work on your own version. Feel free to reach out if you have any questions for me.
+
+## Documentation
+
+Base URL: `https://guidr-backend-api.herokuapp.com/api` //depends on deployment
 
 Checking this in a browser or making a `GET` request to it directly should return a `JSON` object like this:  
 ```
